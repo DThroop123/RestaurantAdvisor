@@ -1,19 +1,29 @@
 @charset "ISO-8859-1";
 
-body {
-	background-color: lightgrey !important;
-}
-
-a:hover {
-	color: inherit !important;
-}
-
 .clearfix::after {
   content: "";
   clear: both;
   display: table;
 }
 
+/* Bootstrap overrides */
+body {
+	background-color: lightgrey !important;
+	font-family: sans-serif !important;
+}
+
+a:hover {
+	color: inherit !important;
+}
+
+.btn {
+	background-color: #1A5972 !important;
+	color: white !important;
+	border: none !important;
+}
+.btn:hover {
+	opacity: 0.7 !important;
+}
 
 /* RestaurantLogin styles */
 .login-header-div {
@@ -26,7 +36,7 @@ a:hover {
 	color: black;
 	font-size: 60px;
 	float: left;
-	margin: 0px;
+	margin: 15px 0px 0px;
 }
 
 .login-div {
@@ -46,12 +56,13 @@ a:hover {
 .login-img {
 	float: left;
 	width: 10%;
-	padding: 10px 0px;
+	padding: 19px 9px;
+	margin-right: 2%;
 }
 
 .login-input {
 	float: left;
-	width: 90%;
+	width: 88%;
 	outline: none;
 	border: none;
 	padding: 0px;
@@ -60,22 +71,37 @@ a:hover {
 	font-size: 16px;
 }
 
+::placeholder {
+	color: #1A5972;
+	opacity: 0.6;
+}
+
+:-ms-input-placeholder {
+	color: #1A5972;
+	opacity: 0.6;
+}
+
+::-ms-input-placeholder {
+	color: #1A5972;
+	opacity: 0.6;
+}
+
 .login-button-div {
 	height: 50px;
 	margin-bottom: 15px;
 }
 
 .login-btn {
-	color: white;
 	height: 100%;
 	width: 80%;
 	margin: auto;
-	background-color: darkblue;
+	font-size: 15px;
+	color: white;
+	background-color: #1A5972;
 	text-transform: uppercase;
 	outline: none;
 	border: none;
 	cursor: pointer;
-	font-size: 15px; 
 	border-radius: 4px;
 }
 
@@ -94,4 +120,16 @@ a:hover {
 	text-decoration: underline;
 }
 
+.login-logo {
+	float: left;
+	width: 15%;
+	margin-left: 60px;
+}
 
+/* Home Styles */
+
+/* Orders Styles */
+
+/* Restaurants Styles */
+
+/* Reviews Styles */
