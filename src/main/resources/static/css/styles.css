@@ -126,6 +126,17 @@ a:hover {
 	margin-left: 60px;
 }
 
+/* header style for each page */
+.header-style {
+	position: relative;
+	left: 50px;
+	top: 50px;
+	font: normal normal bold 48px/61px;
+	letter-spacing: 0.48px;
+	color: #000000;
+	opacity: 1;
+}
+
 /* Home Styles */
 
 /* Orders Styles */
