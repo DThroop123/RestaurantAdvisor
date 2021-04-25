@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>RestaurantAdvisor- Orders</title>
@@ -30,7 +30,48 @@
 			</div>
 		</div>
 	</nav>
-	<h1 class="header-style"> Orders </h1>
+	
+
+
+
+<div class="container">
+
+	 <h1 class="header-style"> Orders </h1>
+	 
+</div>
+
+
+<div class="container">
+	<table class= "table table-striped table-dark">
+	<thead class="thead-dark">
+		<tr>
+			<th> Name </th>
+			<th> Phone </th>
+			<th> Email  </th>
+			<th> Hours </th>
+			<th> Dining Type </th>
+			<th> City  </th>
+			<th> State </th>
+			<th> Price Range </th>
+			<th> Delivery?  </th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		<tr th:each="sumRest : ${sumRestList}">
+			<td th:text="${sumRest.rName}"> </td>
+			<td th:text="${sumRest.phone}"> </td>
+			<td th:text="${sumRest.email}"> </td>
+			<td th:text="${sumRest.hours}"> </td>
+			<td th:text="${sumRest.diningType}"> </td>
+			<td th:text="${sumRest.city}"> </td>
+			<td th:text="${sumRest.state}"> </td>
+			<td th:text="${sumRest.priceRange}"> </td>
+			<td th:text="${sumRest.deliveryFlag}"> </td>
+		</tr>
+	</tbody>
+	</table>
+</div>
 
 </body>
 </html>
