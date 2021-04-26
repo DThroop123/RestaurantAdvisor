@@ -5,6 +5,7 @@ import java.awt.Menu;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -70,11 +71,8 @@ public class OrdersController {
 		@RequestMapping(value = "/orderSubmission", method = RequestMethod.POST)
 		public String orderSubmissionDisplay(HttpServletRequest request, Model model) {
 			
-			Enumeration<String> params = request.getParameterNames(); 
-			while(params.hasMoreElements()){
-			 String paramName = params.nextElement();
-			 System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
-			}
+			Map<String, String[]> params = request.getParameterMap(); 
+			
 		
 			return "submissionTest";
 
