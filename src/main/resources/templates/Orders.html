@@ -45,6 +45,7 @@
 	<table class= "table table-striped table-dark">
 	<thead class="thead-dark">
 		<tr>
+			<th> </th>
 			<th> Name </th>
 			<th> Phone </th>
 			<th> Email  </th>
@@ -59,6 +60,7 @@
 	</thead>
 	<tbody>
 		<tr th:each="sumRest : ${sumRestList}">
+			<td> <a href="displayMenu.html" th:href="@{http://localhost:8080/displayMenu(rname=${sumRest.rName})}">ORDER</a> </td> 
 			<td th:text="${sumRest.rName}"> </td>
 			<td th:text="${sumRest.phone}"> </td>
 			<td th:text="${sumRest.email}"> </td>
@@ -71,6 +73,18 @@
 		</tr>
 	</tbody>
 	</table>
+	
+	<!-- 
+	<script>
+			function showMore(e) {
+				console.log(e.parentNode.parentNode.className);
+				var rname = e.parentNode.parentNode.className;
+				var localHost = "http://localhost:8080/displayMenu?rname=";
+				var url = localHost.concat(rname);
+				document.location.href = url;	
+			}
+		</script> -->
+		
 </div>
 
 </body>
