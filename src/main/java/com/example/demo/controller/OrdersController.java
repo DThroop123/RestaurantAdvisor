@@ -1,8 +1,13 @@
 package com.example.demo.controller;
 
 
+import java.awt.Menu;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.demo.domain.MenuItems;
 import com.example.demo.domain.SumRestaurant;
+import com.example.demo.service.MenuItemsService;
 import com.example.demo.service.SumRestaurantService;
 
 // Controller for dynamic pages in the orders page 
@@ -19,28 +26,59 @@ import com.example.demo.service.SumRestaurantService;
 @Controller
 public class OrdersController {
 	
-	@Autowired
-	SumRestaurantService sumRestService;
+		@Autowired
+		SumRestaurantService sumRestService;
+		@Autowired 
+		MenuItemsService     menuItemsService;
 
 		// displays restaurants to be ordered from 
 		@RequestMapping(value = "/displayOrders", method = RequestMethod.GET)
 		public String restaurantOrderDisplay(Model model) {
 			
-			// database query
-			
+			// database query	
 			List<SumRestaurant> sumRest = new ArrayList<SumRestaurant>();
 			sumRest = sumRestService.getSumRestaurantList();
 			
-			// console test
-//			for (SumRestaurant r : sumRest)
-//				System.out.println(r);
-//			
+			// add list to model
 			model.addAttribute("sumRestList", sumRest);
 			
-			// we will eventually return this with data values filled in (restaurants to be ordered from)
 			return "Orders";
 
 		}
+		
+		
+
+		// displays menu items from specified restaurant 
+		@RequestMapping(value = "/displayMenu", method = RequestMethod.GET)
+		public String restaurantMenuDisplay(HttpServletRequest request, Model model) {
+			
+			// retrieve name of restaurant from HTTP request	
+			String rname = request.getParameter("rname");
+			
+			// database query
+			List<MenuItems> menuItems = new ArrayList<MenuItems>();
+			menuItems = menuItemsService.getMenuItemsList(rname);
+			
+			// add list to model
+			model.addAttribute("menuItems", menuItems);	
+			model.addAttribute("restOrder", rname);
+			
+			return "Menu";
+
+		}
+		
+		// inserts + confirms order
+		@RequestMapping(value = "/orderSubmission", method = RequestMethod.POST)
+		public String orderSubmissionDisplay(HttpServletRequest request, Model model) {
+			
+			Map<String, String[]> params = request.getParameterMap(); 
+			
+		
+			return "submissionTest";
+
+		}
+		
+		
 		
 
 }
