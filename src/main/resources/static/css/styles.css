@@ -54,6 +54,10 @@
 	display: none;
 }
 
+.custom-table_btn-less {
+	display: none;
+}
+
 
 /* Bootstrap overrides */
 body {
