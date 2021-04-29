@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>RestaurantAdvisor- Restaurants</title>
+<title>Restaurants</title>
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <!-- Bootstrap -->
 <link
@@ -18,9 +18,9 @@
 
 <body>
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/Home.html">Restaurant Advisor</a>
+			<a class="navbar-brand" >Restaurant Advisor</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -29,25 +29,22 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" href="Home.html">Home</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="restaurants">Restaurants</a></li>
+					<li class="nav-item"><a class="nav-link active" href="restaurants">Restaurants</a></li>
 					<li class="nav-item"><a class="nav-link" href="reviews">Reviews</a></li>
 					<li class="nav-item"><a class="nav-link" href="displayOrders">Orders</a></li>
+					<li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
 				</ul>
 				<form class="d-flex" style="width: 20%;">
-					<input class="form-control me-2" type="search" placeholder="Search"
-						aria-label="Search">
-					<button class="btn" type="submit" style="width: 40%;">Search</button>
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn" type="button" style="width: 40%;">Search</button>
 				</form>
 			</div>
 		</div>
 	</nav>
 
-
 	<!-- Body -->
 
-	<div class="container">
+	<div class="container" id="tableContainer">
 		<h1 class="header-style">Restaurants</h1>
 		<table class="custom-table table table-striped">
 			<thead class="thead-dark">
@@ -58,18 +55,18 @@
 					<th class="custom-table_th">Hours</th>
 					<th class="custom-table_th">Dining Type</th>
 
-					<th class="custom-table_th-more">Street No.</th>
-					<th class="custom-table_th-more">Street Name</th>
+					<th class="custom-table_th custom-table_th-more">Street No.</th>
+					<th class="custom-table_th custom-table_th-more">Street Name</th>
 
 					<th class="custom-table_th">City</th>
 					<th class="custom-table_th">State</th>
 
-					<th class="custom-table_th-more">Zip</th>
+					<th class="custom-table_th custom-table_th-more">Zip</th>
 
 					<th class="custom-table_th">Price Range</th>
 					<th class="custom-table_th">Delivery?</th>
 
-					<th class="custom-table_th-more">Outdoor Seating?</th>
+					<th class="custom-table_th custom-table_th-more">Outdoor Seating?</th>
 
 
 
@@ -83,34 +80,85 @@
 					<td class="custom-table_td" th:text="${sumRest.hours}"></td>
 					<td class="custom-table_td" th:text="${sumRest.diningType}"></td>
 					
-<!-- 					<td class="custom-table_td-more" th:text="${sumRest.streetno}"></td> -->
-<!-- 					<td class="custom-table_td-more" th:text="${sumRest.streetname}"></td> -->
+					<td class="custom-table_td custom-table_td-more" th:text="${sumRest.streetNo}"></td>
+					<td class="custom-table_td custom-table_td-more" th:text="${sumRest.streetName}"></td>
 					
 					<td class="custom-table_td" th:text="${sumRest.city}"></td>
 					<td class="custom-table_td" th:text="${sumRest.state}"></td>
 					
-<!-- 					<td class="custom-table_td-more" th:text="${sumRest.zip}"></td> -->
+					<td class="custom-table_td custom-table_td-more" th:text="${sumRest.zip}"></td>
 					
 					<td class="custom-table_td" th:text="${sumRest.priceRange}"></td>
 					<td class="custom-table_td" th:text="${sumRest.deliveryFlag}"></td>
 					
-<!-- 					<td class="custom-table_td-more" th:text="${sumRest.outdoorseating}"></td> -->
+					<td class="custom-table_td custom-table_td-more" th:text="${sumRest.outDoorSeatingFlag}"></td>
 					
 					<td style="padding: 0px; height: 30px; border: solid; border-width: 2px;">
-						<button class="custom-table_btn" onclick="showMore(this)" type="button">See More</button>
+						<button class="custom-table_btn custom-table_btn-more" onclick="showMore(this)" type="button">See More</button>
+						<button class="custom-table_btn custom-table_btn-less" onclick="showLess(this)" type="button">See Less</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		
 		<script>
+		var moreth = document.getElementsByClassName("custom-table_th-more");
+		var moretd = document.getElementsByClassName("custom-table_td-more");
+		var btnmore = document.getElementsByClassName("custom-table_btn-more");
+		var btnless = document.getElementsByClassName("custom-table_btn-less");
+		var container = document.getElementById("tableContainer");
+		
 			function showMore(e) {
 				console.log(e.parentNode.parentNode.className);
-				
-// 				var i;
-// 				for(i=0; i<10; i++) {
-					
-// 				}
+				//display more category headings and data cells
+				for(var i=0; i<moreth.length; i++) {
+					moreth[i].style.display = "table-cell";
+				}
+				for(var i=0; i<moretd.length; i++) {
+					moretd[i].style.display = "table-cell";
+				}
+				//switch show more and less buttons				
+				for(var i=0; i<btnmore.length; i++) {
+					btnmore[i].style.display = "none";
+				}
+				for(var i=0; i<btnless.length; i++) {
+					btnless[i].style.display = "block";
+				}
+				//change container size
+				container.style.maxWidth = "76%";
+				//hide other rows
+				var rows = e.parentNode.parentNode.parentNode.childNodes;
+				for(var i=0; i<rows.length; i++) {
+					if(rows[i].classList != e.parentNode.parentNode.className && rows[i].tagName == "TR") {
+						rows[i].style.display = "none";
+					}
+				}
+			}
+			
+			function showLess(e) {
+				//display more category headings and data cells
+				for(var i=0; i<moreth.length; i++) {
+					moreth[i].style.display = "none";
+				}
+				for(var i=0; i<moretd.length; i++) {
+					moretd[i].style.display = "none";
+				}
+				//switch show more and less buttons				
+				for(var i=0; i<btnmore.length; i++) {
+					btnmore[i].style.display = "block";
+				}
+				for(var i=0; i<btnless.length; i++) {
+					btnless[i].style.display = "none";
+				}
+				//change container size
+				container.style.removeProperty("max-width");
+				//show all rows
+				var rows = e.parentNode.parentNode.parentNode.childNodes;
+				for(var i=0; i<rows.length; i++) {
+					if(rows[i].tagName == "TR") {
+						rows[i].style.removeProperty("display");
+					}
+				}
 			}
 		</script>
 	</div>

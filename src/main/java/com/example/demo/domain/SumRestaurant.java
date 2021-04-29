@@ -13,9 +13,13 @@ public class SumRestaurant {
 	String state;
 	String priceRange;
 	String deliveryFlag;
+	String stNo;
+	String stName;
+	String zip;
+	String outDoorFlag;
 	
 	public SumRestaurant(String rName, String phone, String email, String hours, String diningType, String city,
-			String state, String priceRange, String deliveryFlag) {
+			String state, String priceRange, String deliveryFlag, String stNo, String stName, String zip, String outDoorFlag) {
 		super();
 		this.rName = rName;
 		this.phone = phone;
@@ -26,6 +30,10 @@ public class SumRestaurant {
 		this.state = state;
 		this.priceRange = priceRange;
 		this.deliveryFlag = deliveryFlag;
+		this.stNo = stNo;
+		this.stName = stName;
+		this.zip = zip;
+		this.outDoorFlag = outDoorFlag;
 	}
 	
 	public SumRestaurant() {
@@ -86,13 +94,37 @@ public class SumRestaurant {
 	public void setDeliveryFlag(String deliveryFlag) {
 		this.deliveryFlag = deliveryFlag;
 	}
+	public String getStreetNo() {
+		return stNo;
+	}
+	public void setStreetNo(String stNo) {
+		this.stNo = stNo;
+	}
+	public String getStreetName() {
+		return stName;
+	}
+	public void setStreetName(String stName) {
+		this.stName = stName;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getOutDoorSeatingFlag() {
+		return outDoorFlag;
+	}
+	public void setOutDoorSeatingFlag(String outDoorFlag) {
+		this.outDoorFlag = outDoorFlag;
+	}
 	
 	
 	@Override
 	public String toString() {
 		return "SumRestaurant [rName=" + rName + ", phone=" + phone + ", email=" + email + ", hours=" + hours
 				+ ", diningType=" + diningType + ", city=" + city + ", state=" + state + ", priceRange=" + priceRange
-				+ ", deliveryFlag=" + deliveryFlag + "]";
+				+ ", deliveryFlag=" + deliveryFlag + ", stNo=" + stNo + ", stName=" + stName + ", zip=" + zip + ", outDoorFlag=" + outDoorFlag + "]";
 	}
 
 
