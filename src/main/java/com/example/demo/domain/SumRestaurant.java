@@ -112,10 +112,10 @@ public class SumRestaurant {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-	public String getOutDoorFlag() {
+	public String getOutDoorSeatingFlag() {
 		return outDoorFlag;
 	}
-	public void setOutDoorFlag(String outDoorFlag) {
+	public void setOutDoorSeatingFlag(String outDoorFlag) {
 		this.outDoorFlag = outDoorFlag;
 	}
 	
