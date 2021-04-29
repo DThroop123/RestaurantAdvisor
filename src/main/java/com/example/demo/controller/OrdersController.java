@@ -108,12 +108,16 @@ public class OrdersController {
 		// see the contents of the submission for testing
 		System.out.println(order.toString());
 		
-		// insert order into database
+		// insert order mapping into database table RESTAURANT_ORDER
 		orderService.insertOrder(order);
 		
+		// insert each foodItem and its associated quantities
+//		for(int i = 0; i < order.getFnames().length; i++)
+//		{
+//			orderService.insertOrderDetails(order.getFnames()[i], order.getOrderQuant()[i], order.getOrderID());
+//		}
 		
-		// insert order details with order ID
-		
+		// insert oNo to be displayed back to user 
 		model.addAttribute("oNumber", order.getOrderID());
 		
 		status.setComplete();		
