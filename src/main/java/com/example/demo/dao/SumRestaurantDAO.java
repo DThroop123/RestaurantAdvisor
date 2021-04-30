@@ -23,5 +23,10 @@ public class SumRestaurantDAO {
 		return sumRestList;
 	}
 
+	public Integer getRestID(String rname) {
+		Integer restID = restMapper.getRestID(rname);
+		return restID;
+	}
+
 
 }

@@ -20,4 +20,13 @@ public class OrderService {
 		
 	}
 
+	public void insertOrderDetails(Integer orderID, String fname, Integer restID, String quantity) {
+		
+		oDAO.insertOrderDetails(orderID, fname, restID, quantity);
+		
+		
+	}
+
+
+
 }
