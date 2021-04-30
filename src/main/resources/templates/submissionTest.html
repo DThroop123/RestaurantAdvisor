@@ -39,8 +39,12 @@
 </nav>
 
 
-	<div class="container">
-		<h1 class="header-style"> You have successfully submitted your order. </h1>	
+	<div class="d-flex justify-content-center">
+		<h1 class="header-style"> Your order has been placed!</h1>	
+	</div>
+	<div class="d-flex justify-content-center">
+		<h2> Your order number is #  </h2>
+		<h2 th:text="${oNumber}"></h2>
 	</div>
 
 </body>
