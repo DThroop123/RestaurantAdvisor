@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Menu</title>
+<meta charset="ISO-8859-1">
+<title>Orders</title>
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <!-- Bootstrap -->
 <link
@@ -15,17 +15,11 @@
 	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
 	crossorigin="anonymous"></script>
 </head>
-<body>
 
-<<<<<<< HEAD
+<body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/Home.html">Restaurant Advisor</a>
-=======
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<div class="container-fluid">
 			<a class="navbar-brand" >Restaurant Advisor</a>
->>>>>>> main
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -34,78 +28,56 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-<<<<<<< HEAD
-					<li class="nav-item"><a class="nav-link" href="Home.html">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="restaurants">Restaurants</a></li>
 					<li class="nav-item"><a class="nav-link" href="reviews">Reviews</a></li>
-					<li class="nav-item"><a class="nav-link active"
-						href="displayOrders">Orders</a></li>
-				</ul>
-				<form class="d-flex" style="width: 20%;">
-					<input class="form-control me-2" type="search" placeholder="Search"
-						aria-label="Search">
-					<button class="btn" style="width: 40%;" type="submit">Search</button>
-=======
-					<li class="nav-item"><a class="nav-link" href="restaurants">Restaurants</a></li>
-					<li class="nav-item"><a class="nav-link" href="reviews">Reviews</a></li>
-					<li class="nav-item"><a class="nav-link active" href="displayOrders">Orders</a></li>
+					<li class="nav-item"><a class="nav-link" href="displayOrders">Orders</a></li>
 					<li class="nav-item"><a class="nav-link" href="logout">Logout</a></li>
 				</ul>
 				<form class="d-flex" style="width: 20%;">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn" type="button" style="width: 40%;">Search</button>
->>>>>>> main
 				</form>
 			</div>
 		</div>
 	</nav>
 
 
-	<div class="container">
-		<h1 class="header-style" th:text="${restOrder} + '   Menu'" />
-	</div>
-	<div class="container">
-	<form action="" th:action="@{/orderSubmission}" th:object="${order}" method="post"> 
-			<table class="table table-striped table-dark">
-				<thead class="thead-dark">
-					<tr>
-						<th>Food Item</th>
-						<th>Price</th>
-						<th>Quantity Desired</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="menu, stat : ${menuItems}">
-						<!-- 	<td> <a href="displayMenu.html" th:href="@{http://localhost:8080/displayMenu(rname=${sumRest.rName})}">ORDER</a> </td>  -->
-						<td th:text="${menu.foodName}"></td>
-						<td th:text="${menu.price}"></td>
-						<td><input type="text" th:field="*{orderQuant[__${stat.index}__]}"/></td>
-					</tr>
-				</tbody>
-			</table>
-		<div class="container">
-			 <select th:field="*{medium}">
-  				<option 
-      				th:each="dropdownValue: ${mediumList}"
-      				th:value="${dropdownValue}"
-      				th:text="${dropdownValue}" ></option>
-			</select>
-		</div> 
-		<div>
-			 <input type='hidden' th:value="${restOrder}" th:field="*{rname}">
-		</div>
-		<div class="container">
-			 <input type="submit" value="Submit Order" />
-		</div>
-		</form>
-	</div>
-
-
-
-
-
-
-
-
+			<div class="container">
+				<h1 class="header-style" th:text="${restOrder} + '   Menu'" />
+			</div>
+			<div class="container">
+				<form action="" th:action="@{/orderSubmission}" th:object="${order}"
+					method="post">
+					<table class="table table-striped table-dark">
+						<thead class="thead-dark">
+							<tr>
+								<th>Food Item</th>
+								<th>Price</th>
+								<th>Quantity Desired</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="menu, stat : ${menuItems}">
+								<td th:text="${menu.foodName}"></td>
+								<td th:text="${menu.price}"></td>
+								<td><input type="text"
+									th:field="*{orderQuant[__${stat.index}__]}" /></td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="container">
+						<select th:field="*{medium}">
+							<option th:each="dropdownValue: ${mediumList}"
+								th:value="${dropdownValue}" th:text="${dropdownValue}"></option>
+						</select>
+					</div>
+					<div>
+						<input type='hidden' th:value="${restOrder}" th:field="*{rname}">
+					</div>
+					<div class="container">
+						<input type="submit" value="Submit Order" />
+					</div>
+				</form>
+			</div>
 </body>
 </html>
