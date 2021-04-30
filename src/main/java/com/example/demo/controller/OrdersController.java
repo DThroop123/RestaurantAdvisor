@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.example.demo.domain.MenuItems;
 import com.example.demo.domain.Order;
 import com.example.demo.domain.SumRestaurant;
+import com.example.demo.domain.User;
 import com.example.demo.service.MenuItemsService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.SumRestaurantService;
@@ -77,7 +79,7 @@ public class OrdersController {
 		
 		// this session's form with pre-filled values
 		
-		Order order = new Order(quant, fNames, "", rname, 0);
+		Order order = new Order(quant, fNames, "", rname, 0, "");
 		
 		System.out.println(order.toString());
 		
@@ -102,20 +104,29 @@ public class OrdersController {
 
 	// inserts + confirms order
 	@RequestMapping(value = "/orderSubmission", method = RequestMethod.POST)
-	public String orderSubmissionDisplay(@ModelAttribute("order") Order order, Model model, SessionStatus status) {
-
+	public String orderSubmissionDisplay(@ModelAttribute("order") Order order, Model model, SessionStatus status, HttpServletRequest request) {
+		
+		System.out.println(order.getRname());
+		
+		Integer restID = sumRestService.getRestID(order.getRname().toString());
+		
+		// set the currently logged in user to be the owner of the order
+		HttpSession session = request.getSession(true);
+		order.setCustEmail(session.getAttribute("email").toString());
+		
 		// see the contents of the submission for testing
 		System.out.println(order.toString());
+		System.out.println(restID.toString());
 		
 		// insert order mapping into database table RESTAURANT_ORDER
 		orderService.insertOrder(order);
 		
-		// insert each foodItem and its associated quantities
-//		for(int i = 0; i < order.getFnames().length; i++)
-//		{
-//			orderService.insertOrderDetails(order.getFnames()[i], order.getOrderQuant()[i], order.getOrderID());
-//		}
-		
+		//insert each foodItem and its associated quantities
+		for(int i = 0; i < order.getFnames().length; i++)
+		{
+			orderService.insertOrderDetails(order.getOrderID() , order.getFnames()[i], restID, order.getOrderQuant()[i]);
+		}
+	
 		// insert oNo to be displayed back to user 
 		model.addAttribute("oNumber", order.getOrderID());
 		

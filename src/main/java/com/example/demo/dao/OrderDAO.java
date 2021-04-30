@@ -16,6 +16,13 @@ public class OrderDAO {
 		oMap.insertOrder(order);
 		
 	}
+
+	public void insertOrderDetails(Integer orderID, String fname, Integer restID, String quantity) {
+		
+		int quantityInt =  Integer.parseInt(quantity);
+		oMap.insertOrderDetails(orderID, fname, restID, quantityInt);
+		
+	}
 	
 
 }
