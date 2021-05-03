@@ -12,12 +12,12 @@ import com.example.demo.domain.User;
 @Mapper
 public interface UserMapper {
 	
-	@Select("SELECT EMAIL, STREETNO, STREETNAME, CITY, STATE, ZIP, PASSWORD, PHONE, FNAME, MINIT, LNAME FROM RESTAURANT_CUSTOMER")
+	@Select("SELECT EMAIL, STNO, STNAME, CITY, STATE, ZIP, PASSWORD, PHONE, FNAME, MINIT, LNAME FROM CUSTOMER")
 	List<User> getUserList();
 
-	@Update("update RESTAURANT_CUSTOMER set fname = #{fname}, minit=#{minit}, lname=#{lname}, phone=#{phone} where email = #{email}")
+	@Update("update CUSTOMER set fname = #{fname}, minit=#{minit}, lname=#{lname}, phone=#{phone} where email = #{email}")
 	void saveUser(User user);
 	
-	@Insert("insert INTO RESTAURANT_CUSTOMER (email, streetno, streetname, city, state, zip, password, phone, fname, minit, lname) values(#{email}, #{stno}, #{stname}, #{city}, #{state}, #{zip}, #{password}, #{phone}, #{fname}, #{minit}, #{lname})")
+	@Insert("insert INTO CUSTOMER (email, stno, stname, city, state, zip, password, phone, fname, minit, lname) values(#{email}, #{stno}, #{stname}, #{city}, #{state}, #{zip}, #{password}, #{phone}, #{fname}, #{minit}, #{lname})")
 	void insertUser(User user);	
 }

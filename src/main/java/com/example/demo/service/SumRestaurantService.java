@@ -19,11 +19,6 @@ public class SumRestaurantService {
 		
 	}
 	
-	public Integer getRestID(String rname)
-	{
-		return sRDAO.getRestID(rname);
-	}
-	
 	
 	
 	
