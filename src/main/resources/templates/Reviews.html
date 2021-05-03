@@ -43,6 +43,7 @@
 		<table class="custom-table table table-striped">
 			<thead class="thead-dark">
 		<tr>
+			<th> 
 			<th> Name </th>
 			<th> Phone </th>
 			<th> Email  </th>
@@ -57,7 +58,7 @@
 	</thead>
 	<tbody>
 		<tr th:each="sumRest : ${sumRestList}">
-			 
+			<td> <a href="reviewForm.html" th:href="@{http://localhost:8080/submitReview(rname=${sumRest.rName})}">Review</a> </td> 
 			<td th:text="${sumRest.rName}"> </td>
 			<td th:text="${sumRest.phone}"> </td>
 			<td th:text="${sumRest.email}"> </td>
