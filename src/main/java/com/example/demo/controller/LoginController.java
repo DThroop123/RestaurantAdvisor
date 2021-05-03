@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.sql.SQLIntegrityConstraintViolationException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ import com.example.demo.service.UserService;
 
 @Controller
 public class LoginController {
-
+	
 	@Autowired
 	UserService userService;
 
@@ -36,7 +36,7 @@ public class LoginController {
 		return viewPage;
 	}
 
-	// login user
+	//login user
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public String loginUser(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
@@ -44,35 +44,34 @@ public class LoginController {
 
 		String email = user.getEmail();
 		String password = user.getPassword();
-
+		
 		HttpSession session = request.getSession(true);
-
+		
 		List<User> userList = new ArrayList<User>();
 		userList = userService.getUserList();
 		int userIndex = -1;
-		Boolean found = false;
 
-		for (int i = 0; i < userList.size(); i++) {
-			if (userList.get(i).getEmail().equals(email)) {
-				found = true;
-				if (userList.get(i).getPassword().equals(password)) {
+		for(int i=0; i<userList.size(); i++) {
+			if(userList.get(i).getEmail().equals(email)) {
+				if(userList.get(i).getPassword().equals(password)) {
 					session.setAttribute("email", email);
 					userIndex = i;
 					viewPage = "home";
 				} else {
+					session.invalidate();
 					message = "Incorrect password";
 					viewPage = "userLogin";
 					user = new User();
 				}
+			} else {
+				session.invalidate();
+				viewPage = "userLogin";
+				message = "User not found";
+				user = new User();
 			}
 		}
-		if (!found) {
-			viewPage = "userLogin";
-			message = "User not found";
-			user = new User();
-		}
-
-		if (userIndex > -1) {
+		
+		if(userIndex > -1) {
 			model.addAttribute("user", userList.get(userIndex));
 		} else {
 			model.addAttribute("user", user);
@@ -81,7 +80,7 @@ public class LoginController {
 
 		return viewPage;
 	}
-
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String userLogout(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
@@ -94,8 +93,8 @@ public class LoginController {
 
 		return viewPage;
 	}
-
-	// get user registration page
+	
+	//get user registration page
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
@@ -107,34 +106,24 @@ public class LoginController {
 		return viewPage;
 	}
 
-	// register new user
+	//register new user
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String registerUser(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
 		System.out.println("I am in register inside login controller");
-		String viewPage;
+		
+//		UserService userService = new UserService();
+		userService.registerUser(user);
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("email", user.getEmail());
+		
+		String viewPage = "home", registrationMessage = "Registration Successful!";
 
-		try {
-			Integer.parseInt(user.getStno());
-			System.out.println("stNo is an int");
-			// stNo is an int
-			userService.registerUser(user);
+		model.addAttribute("user", user);
+		model.addAttribute("registrationMessage", registrationMessage);
 
-			HttpSession session = request.getSession(true);
-			session.setAttribute("email", user.getEmail());
-
-			viewPage = "home";
-			String registrationMessage = "Registration Successful!";
-
-			model.addAttribute("user", user);
-			model.addAttribute("registrationMessage", registrationMessage);
-
-		} catch (NumberFormatException e) {
-			viewPage = "register";
-			String errorMsg = "Street Number field must be a number";
-			model.addAttribute("errorMsg", errorMsg);
-		}
-
+		
 		return viewPage;
 	}
 
