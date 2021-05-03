@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -23,15 +22,15 @@ import com.example.demo.service.SumRestaurantService;
 // Controller for dynamic pages in the orders page 
 
 @Controller
-public class OrdersController {
+public class ReviewsController {
 	
 		@Autowired
 		SumRestaurantService sumRestService;
 		@Autowired 
 		MenuItemsService     menuItemsService;
 
-		// displays restaurants to be ordered from 
-		@RequestMapping(value = "/displayOrders", method = RequestMethod.GET)
+		// displays restaurants to be reviewed 
+		@RequestMapping(value = "/reviews", method = RequestMethod.GET)
 		public String restaurantOrderDisplay(Model model) {
 			
 			// database query	
@@ -41,39 +40,34 @@ public class OrdersController {
 			// add list to model
 			model.addAttribute("sumRestList", sumRest);
 			
-			return "Orders";
+			return "Reviews";
 
 		}
 		
-		
 
 		// displays menu items from specified restaurant 
-		@RequestMapping(value = "/displayMenu", method = RequestMethod.GET)
+		@RequestMapping(value = "/submitReview", method = RequestMethod.GET)
 		public String restaurantMenuDisplay(HttpServletRequest request, Model model) {
 			
 			// retrieve name of restaurant from HTTP request	
 			String rname = request.getParameter("rname");
 			
 			// database query
-			List<MenuItems> menuItems = new ArrayList<MenuItems>();
-			menuItems = menuItemsService.getMenuItemsList(rname);
 			
-			// add list to model
-			model.addAttribute("menuItems", menuItems);	
 			model.addAttribute("restOrder", rname);
 			
-			return "Menu";
+			return "reviewForm";
 
 		}
 		
-		// inserts + confirms order
-		@RequestMapping(value = "/orderSubmission", method = RequestMethod.POST)
+//		 inserts + confirms order
+		@RequestMapping(value = "/submitReview", method = RequestMethod.POST)
 		public String orderSubmissionDisplay(HttpServletRequest request, Model model) {
 			
-			Map<String, String[]> params = request.getParameterMap(); 
+			
 			
 		
-			return "submissionTest";
+			return "reviewSubmission";
 
 		}
 		

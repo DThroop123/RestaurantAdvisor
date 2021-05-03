@@ -12,7 +12,6 @@
 	</div>
 
 	<form class="register-form" action="#" th:action="@{/register}" th:object="${user}" method="post">
-	<span class="error-message" th:text="${errorMsg}"></span>
 	<span class="register-message" th:text="${message}"></span>
 		<table class="register-table">
 			<tr>
