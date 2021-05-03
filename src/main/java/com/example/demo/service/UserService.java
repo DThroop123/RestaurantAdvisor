@@ -23,6 +23,7 @@ UserDAO userDAO;
 	}
 	
 	public void registerUser(User user) {
+//		UserDAO userDAO = new UserDAO();
 		userDAO.registerUser(user);
 	}
 }	

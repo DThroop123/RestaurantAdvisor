@@ -25,7 +25,7 @@ public class RestaurantsController {
 		
 		List<SumRestaurant> sumRest = new ArrayList<SumRestaurant>();
 		sumRest = sumRestService.getSumRestaurantList();
-			
+
 		model.addAttribute("sumRestList", sumRest);
 		
 		return "Restaurants";

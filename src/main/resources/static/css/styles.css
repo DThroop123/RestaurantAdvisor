@@ -1,6 +1,5 @@
 @charset "ISO-8859-1";
 
-
 /* Universal Styles */
 .header-style {
 	font: normal normal bold 48px/61px;
@@ -17,9 +16,9 @@
 }
 
 .clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
+	content: "";
+	clear: both;
+	display: table;
 }
 
 .custom-table {
@@ -63,7 +62,6 @@
 	display: none;
 }
 
-
 /* Bootstrap overrides */
 body {
 	background-color: lightgrey !important;
@@ -79,10 +77,10 @@ a:hover {
 	color: white !important;
 	border: none !important;
 }
+
 .btn:hover {
 	opacity: 0.7 !important;
 }
-
 
 /* RestaurantLogin styles */
 .login-header-div {
@@ -240,15 +238,15 @@ table.register-table input {
 	font-size: 25px;
 }
 
+.error-message {
+	color: red;
+	font-size: 20px;
+}
 
 /* Home Styles */
 
-
 /* Orders Styles */
-
 
 /* Restaurants Styles */
 
-
 /* Reviews Styles */
-
