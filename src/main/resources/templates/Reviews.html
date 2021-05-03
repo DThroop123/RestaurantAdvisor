@@ -5,20 +5,8 @@
 <title>RestaurantAdvisor- Reviews</title>
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <!-- Bootstrap -->
-<<<<<<< Updated upstream
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-=======
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
-	crossorigin="anonymous"></script>
->>>>>>> Stashed changes
 </head>
 
 <body>
@@ -48,20 +36,14 @@
 
 
 
-<<<<<<< Updated upstream
 
 
-=======
->>>>>>> Stashed changes
 <div class="container" id="tableContainer">
 		<h1 class="header-style">Reviews</h1>
 		<table class="custom-table table table-striped">
 			<thead class="thead-dark">
 		<tr>
-<<<<<<< Updated upstream
 			<th> 
-=======
->>>>>>> Stashed changes
 			<th> Name </th>
 			<th> Phone </th>
 			<th> Email  </th>
@@ -76,10 +58,7 @@
 	</thead>
 	<tbody>
 		<tr th:each="sumRest : ${sumRestList}">
-<<<<<<< Updated upstream
 			<td> <a href="reviewForm.html" th:href="@{http://localhost:8080/submitReview(rname=${sumRest.rName})}">Review</a> </td> 
-=======
->>>>>>> Stashed changes
 			<td th:text="${sumRest.rName}"> </td>
 			<td th:text="${sumRest.phone}"> </td>
 			<td th:text="${sumRest.email}"> </td>
@@ -93,17 +72,11 @@
 	</tbody>
 	</table>
 	
-<<<<<<< Updated upstream
 	
-=======
->>>>>>> Stashed changes
 		
 </div>
 
 </body>
 </html>
-<<<<<<< Updated upstream
 
 <!-- <td> <a href="displayMenu.html" th:href="@{http://localhost:8080/displayMenu(rname=${sumRest.rName})}">ORDER</a> </td> -->
-=======
->>>>>>> Stashed changes
