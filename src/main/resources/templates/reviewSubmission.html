@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edit Employee</title>
+<link rel="stylesheet" type="text/css" href="css/example.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+	<span th:text="${message}" />
+
+	<br />
+
+	<form action="" th:action="@{/saveUser}" th:object="${employee}"
+		method="post">
+
+		<table class="prettytable" border="1">
+			<tr>
+				<td>SSN :</td>
+				<td><input type="text" th:field="*{ssn}" /></td>
+			</tr>
+			
+			<tr>
+				<td>First Name :</td>
+				<td><input type="text" th:field="*{fname}" /></td>
+			</tr>
+
+			<tr>
+				<td>Last Name :</td>
+				<td><input type="text" th:field="*{lname}" /></td>
+			</tr>
+
+			<tr>
+				<td>Department Number:</td>
+				<td>
+					<select th:field="*{dno}">
+						<option th:each="dropdownValue: ${dnoList}" th:value="${dropdownValue}" th:text="${dropdownValue}"></option>
+					</select></td>
+			</tr>
+
+			<tr>
+				<td><input type="reset" value="Reset" /></td>
+				<td><input type="submit" value="Submit" /></td>
+			</tr>
+
+		</table>
+
+	</form>
+
+</body>
+</html>
