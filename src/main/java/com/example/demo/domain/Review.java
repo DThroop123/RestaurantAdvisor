@@ -2,24 +2,26 @@ package com.example.demo.domain;
 
  
 
-public class UserReviews {
+public class Review {
 	
 	double reviewId;
 	String custEmail;
+	double restID;
 	String reviewTitle;
 	String reviewDescr;
 	String reviewDate; //might need to change from string value
 	double rating;
 	
 	
-	public UserReviews() {
+	public Review() {
 		
 	}
-	public UserReviews(double reviewId, String custEmail, String reviewTitle, String reviewDescr, String reviewDate,
+	public Review(double reviewId, String custEmail, double restID, String reviewTitle, String reviewDescr, String reviewDate,
 			double rating) {
 		super();
 		this.reviewId = reviewId;
 		this.custEmail = custEmail;
+		this.restID = restID;
 		this.reviewTitle = reviewTitle;
 		this.reviewDescr = reviewDescr;
 		this.reviewDate = reviewDate;
@@ -36,6 +38,12 @@ public class UserReviews {
 	}
 	public void setCustEmail(String custEmail) {
 		this.custEmail = custEmail;
+	}
+	public double getRestID() {
+		return restID;
+	}
+	public void setRestID(double restID) {
+		this.restID = restID;
 	}
 	public String getReviewTitle() {
 		return reviewTitle;
@@ -63,9 +71,11 @@ public class UserReviews {
 	}
 	@Override
 	public String toString() {
-		return "UserReviews [reviewId=" + reviewId + ", custEmail=" + custEmail + ", reviewTitle=" + reviewTitle
-				+ ", reviewDescr=" + reviewDescr + ", reviewDate=" + reviewDate + ", rating=" + rating + "]";
+		return "Review [reviewId=" + reviewId + ", custEmail=" + custEmail + ", restID=" + restID + ", reviewTitle="
+				+ reviewTitle + ", reviewDescr=" + reviewDescr + ", reviewDate=" + reviewDate + ", rating=" + rating
+				+ "]";
 	}
+	
 	
 	
 }

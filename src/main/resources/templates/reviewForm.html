@@ -40,7 +40,7 @@
 	</div>
 	<div class="container">
 	
-	<form action="submitReview" method="post">
+	<form action="submitReview" th:object="${review}" method="post">
 		<label for="reviewTitle">Title:</label><br>
 	  	<input type="text" id="reviewTitle" name="reviewTitle" value="" size=50><br><br>
 	  	<label for="reviewDescr">Description:</label><br>
