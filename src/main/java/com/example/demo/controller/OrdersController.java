@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-
 import java.awt.Menu;
 
 import java.util.ArrayList;
@@ -64,35 +63,29 @@ public class OrdersController {
 		// database query
 		List<MenuItems> menuItems = new ArrayList<MenuItems>();
 		menuItems = menuItemsService.getMenuItemsList(rname);
-		
+
 		// variable to initialize order lists -> otherwise list is null
 		int initialize = menuItems.size();
-		
-		//initialize foodName and quantity array
+
+		// initialize foodName and quantity array
 		String[] fNames = new String[initialize];
 		String[] quant = new String[initialize];
-		for(int j = 0; j < fNames.length; j++)
-		{
+		for (int j = 0; j < fNames.length; j++) {
 			fNames[j] = "";
 			quant[j] = "";
 		}
-		
+
 		// this session's form with pre-filled values
+		Order order = new Order(quant, fNames, "", "", "", rname, 0, "");
 		
-		Order order = new Order(quant, fNames, "", rname, 0, "");
-		
-		System.out.println(order.toString());
-		
-		for(int i = 0; i < menuItems.size(); i++)
-		{
+		// insert food names from menu and set order quantity too "0"
+		for (int i = 0; i < menuItems.size(); i++) {
 			order.getFnames()[i] = menuItems.get(i).getFoodName();
 			order.getOrderQuant()[i] = "0";
-			
-		}
-		
-		System.out.println(order.toString());
 
-		// add lists to model
+		}
+
+		// add elements to the model
 		model.addAttribute("order", order);
 		model.addAttribute("mediumList", getMedium());
 		model.addAttribute("menuItems", menuItems);
@@ -104,46 +97,68 @@ public class OrdersController {
 
 	// inserts + confirms order
 	@RequestMapping(value = "/orderSubmission", method = RequestMethod.POST)
-	public String orderSubmissionDisplay(@ModelAttribute("order") Order order, Model model, SessionStatus status, HttpServletRequest request) {
-		
-		System.out.println(order.getRname());
-		
+	public String orderSubmissionDisplay(@ModelAttribute("order") Order order, Model model, SessionStatus status,
+			HttpServletRequest request) {
+
+		// initializing variables
+		int zeroCount = 0;
 		Integer restID = sumRestService.getRestID(order.getRname().toString());
 		
+		// empty order error checking
+		for (int i = 0; i < order.getOrderQuant().length; i++) {
+			if (order.getOrderQuant()[i].equals("0")) {
+				zeroCount++;
+			}
+		}
+
+		// order was empty --> return error page
+		if (zeroCount == order.getOrderQuant().length) {
+
+			return "emptyOrder";
+		}
+
+		// determining the medium of the order and setting the correct flag
+		if (order.getMedium().equals("Pickup")) {
+			order.setpFlag("Y");
+			order.setdFlag("N");
+		} else {
+			order.setpFlag("N");
+			order.setdFlag("Y");
+		}
+
 		// set the currently logged in user to be the owner of the order
 		HttpSession session = request.getSession(true);
 		order.setCustEmail(session.getAttribute("email").toString());
-		
-		// see the contents of the submission for testing
-		System.out.println(order.toString());
-		System.out.println(restID.toString());
-		
+
 		// insert order mapping into database table RESTAURANT_ORDER
 		orderService.insertOrder(order);
-		
-		//insert each foodItem and its associated quantities
-		for(int i = 0; i < order.getFnames().length; i++)
-		{
-			orderService.insertOrderDetails(order.getOrderID() , order.getFnames()[i], restID, order.getOrderQuant()[i]);
+
+		// insert each foodItem and its associated quantity into database table
+		// RESTAURANT_ODETAILS
+		for (int i = 0; i < order.getFnames().length; i++) {
+			// if the quantity ordered does not equal 0 we want to insert it
+			if (!(order.getOrderQuant()[i].equals("0"))) {
+				orderService.insertOrderDetails(order.getOrderID(), order.getFnames()[i], restID,
+						order.getOrderQuant()[i]);
+			}
 		}
-	
-		// insert oNo to be displayed back to user 
+
+		// insert oNo to be displayed back to user
 		model.addAttribute("oNumber", order.getOrderID());
-		
-		status.setComplete();		
-		return "submissionTest";
+		// complete session status for order form
+		status.setComplete();
+
+		return "OrderSubmission";
 
 	}
-	
 
+	// returns list of options for order medium
 	public ArrayList<String> getMedium() {
 		ArrayList<String> mediumList = new ArrayList<String>();
 		mediumList.add("Pickup");
 		mediumList.add("Delivery");
-		
+
 		return mediumList;
 	}
-	
-	
 
 }

@@ -10,8 +10,8 @@ import com.example.demo.domain.Order;
 @Mapper
 public interface orderMapper {
 	
-	@SelectKey(statement = "SELECT MAX(ONO) FROM RESTAURANT_ORDER", keyProperty = "orderID", before = true, resultType = int.class)
-	@Insert("INSERT INTO RESTAURANT_ORDER VALUES (Restaurant_Order_Ono.nextval,sysdate, #{custEmail},'Y','N','N',null,null,sysdate + interval '10' minute)")
+	@SelectKey(statement = "SELECT MAX(ONO) FROM RESTAURANT_ORDER", keyProperty = "orderID", before = false, resultType = int.class)
+	@Insert("INSERT INTO RESTAURANT_ORDER VALUES (Restaurant_Order_Ono.nextval,sysdate, #{custEmail},'N', #{dFlag}, #{pFlag}, null, null, sysdate + interval '10' minute)")
 	void insertOrder(Order order);
 	
 
