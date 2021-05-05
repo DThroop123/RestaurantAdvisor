@@ -6,27 +6,31 @@ public class Review {
 	
 	double reviewId;
 	String custEmail;
-	double restID;
+	String restName;
 	String reviewTitle;
 	String reviewDescr;
 	String reviewDate; //might need to change from string value
 	double rating;
+	Integer restID;
 	
 	
 	public Review() {
 		
 	}
-	public Review(double reviewId, String custEmail, double restID, String reviewTitle, String reviewDescr, String reviewDate,
-			double rating) {
+	
+	public Review(double reviewId, String custEmail, String restName, String reviewTitle, String reviewDescr,
+			String reviewDate, double rating, Integer restID) {
 		super();
 		this.reviewId = reviewId;
 		this.custEmail = custEmail;
-		this.restID = restID;
+		this.restName = restName;
 		this.reviewTitle = reviewTitle;
 		this.reviewDescr = reviewDescr;
 		this.reviewDate = reviewDate;
 		this.rating = rating;
+		this.restID = restID;
 	}
+
 	public double getReviewId() {
 		return reviewId;
 	}
@@ -39,11 +43,11 @@ public class Review {
 	public void setCustEmail(String custEmail) {
 		this.custEmail = custEmail;
 	}
-	public double getRestID() {
-		return restID;
+	public String getRestName() {
+		return restName;
 	}
-	public void setRestID(double restID) {
-		this.restID = restID;
+	public void setRestName(String restName) {
+		this.restName = restName;
 	}
 	public String getReviewTitle() {
 		return reviewTitle;
@@ -69,12 +73,24 @@ public class Review {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+	
+	public Integer getRestID() {
+		return restID;
+	}
+
+	public void setRestID(Integer restID) {
+		this.restID = restID;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", custEmail=" + custEmail + ", restID=" + restID + ", reviewTitle="
+		return "Review [reviewId=" + reviewId + ", custEmail=" + custEmail + ", restName=" + restName + ", reviewTitle="
 				+ reviewTitle + ", reviewDescr=" + reviewDescr + ", reviewDate=" + reviewDate + ", rating=" + rating
-				+ "]";
+				+ ", restID=" + restID + "]";
 	}
+
+	
+	
 	
 	
 	

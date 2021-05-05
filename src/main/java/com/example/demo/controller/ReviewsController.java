@@ -49,13 +49,14 @@ public class ReviewsController {
 
 		// displays menu items from specified restaurant 
 		@RequestMapping(value = "/submitReview", method = RequestMethod.GET)
-		public String restaurantMenuDisplay(HttpServletRequest request, Model model) {
+		public String restaurantMenuDisplay(HttpServletRequest request, Model model, @ModelAttribute Review review) {
+			
 			
 			// retrieve name of restaurant from HTTP request	
 			String rname = request.getParameter("rname");
 			
-			// database query
-			
+
+			model.addAttribute("review", review);
 			model.addAttribute("restOrder", rname);
 			
 			return "reviewForm";
@@ -67,23 +68,15 @@ public class ReviewsController {
 		public String orderSubmissionDisplay(@ModelAttribute("review") Review review, Model model, SessionStatus status, HttpServletRequest request) {
 			System.out.println("I am in the submitReview controller");
 
-			System.out.println(review.getRestID());
-			
 			HttpSession session = request.getSession(true);
 			review.setCustEmail(session.getAttribute("email").toString());
 			
-			System.out.println(review.getCustEmail()+ " cust email");
+			Integer restID = sumRestService.getRestID(review.getRestName().toString());
 			
-			System.out.println(review.getRating() + " rating"); 
-			System.out.println(review.getReviewTitle()+ " title");
-			System.out.println(review.getReviewDescr()+ " description");
-			
-			
+			review.setRestID(restID);
+
 			reviewService.createReview(review);
-			
-			
-			
-		
+
 			return "reviewSubmission";
 
 		}
