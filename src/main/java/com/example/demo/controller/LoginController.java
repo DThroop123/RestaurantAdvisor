@@ -32,6 +32,20 @@ public class LoginController {
 
 		return viewPage;
 	}
+	
+//	@RequestMapping(value = "/home", method = RequestMethod.GET)
+//	public String goHome(HttpServletRequest request, Model model) {
+//
+//		String viewPage = "Home", message = "";
+//
+//		HttpSession session = request.getSession();
+//		String name = session.getAttribute("fname").toString();
+//
+//		model.addAttribute("name", name);
+//		model.addAttribute("message", message);
+//
+//		return viewPage;
+//	}
 
 	// login user
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
@@ -54,6 +68,7 @@ public class LoginController {
 				found = true;
 				if (userList.get(i).getPassword().equals(password)) {
 					session.setAttribute("email", email);
+					session.setAttribute("fname", userList.get(i).getFname());
 					userIndex = i;
 					viewPage = "home";
 				} else {
