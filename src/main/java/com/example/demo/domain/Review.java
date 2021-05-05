@@ -2,29 +2,35 @@ package com.example.demo.domain;
 
  
 
-public class UserReviews {
+public class Review {
 	
 	double reviewId;
 	String custEmail;
+	String restName;
 	String reviewTitle;
 	String reviewDescr;
 	String reviewDate; //might need to change from string value
 	double rating;
+	Integer restID;
 	
 	
-	public UserReviews() {
+	public Review() {
 		
 	}
-	public UserReviews(double reviewId, String custEmail, String reviewTitle, String reviewDescr, String reviewDate,
-			double rating) {
+	
+	public Review(double reviewId, String custEmail, String restName, String reviewTitle, String reviewDescr,
+			String reviewDate, double rating, Integer restID) {
 		super();
 		this.reviewId = reviewId;
 		this.custEmail = custEmail;
+		this.restName = restName;
 		this.reviewTitle = reviewTitle;
 		this.reviewDescr = reviewDescr;
 		this.reviewDate = reviewDate;
 		this.rating = rating;
+		this.restID = restID;
 	}
+
 	public double getReviewId() {
 		return reviewId;
 	}
@@ -36,6 +42,12 @@ public class UserReviews {
 	}
 	public void setCustEmail(String custEmail) {
 		this.custEmail = custEmail;
+	}
+	public String getRestName() {
+		return restName;
+	}
+	public void setRestName(String restName) {
+		this.restName = restName;
 	}
 	public String getReviewTitle() {
 		return reviewTitle;
@@ -61,11 +73,25 @@ public class UserReviews {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+	
+	public Integer getRestID() {
+		return restID;
+	}
+
+	public void setRestID(Integer restID) {
+		this.restID = restID;
+	}
+
 	@Override
 	public String toString() {
-		return "UserReviews [reviewId=" + reviewId + ", custEmail=" + custEmail + ", reviewTitle=" + reviewTitle
-				+ ", reviewDescr=" + reviewDescr + ", reviewDate=" + reviewDate + ", rating=" + rating + "]";
+		return "Review [reviewId=" + reviewId + ", custEmail=" + custEmail + ", restName=" + restName + ", reviewTitle="
+				+ reviewTitle + ", reviewDescr=" + reviewDescr + ", reviewDate=" + reviewDate + ", rating=" + rating
+				+ ", restID=" + restID + "]";
 	}
+
+	
+	
+	
 	
 	
 }
