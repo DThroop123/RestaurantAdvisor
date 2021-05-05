@@ -101,17 +101,25 @@ public class OrdersController {
 		// initializing variables
 		int zeroCount = 0;
 		Integer restID = sumRestService.getRestID(order.getRname().toString());
-		
+		Boolean negativeNum = false;
 		// empty order error checking
 		for (int i = 0; i < order.getOrderQuant().length; i++) {
 			if (order.getOrderQuant()[i].equals("0")) {
 				zeroCount++;
+			}
+			if(Integer.parseInt(order.getOrderQuant()[i]) < 0) {
+				negativeNum = true;
 			}
 		}
 
 		// order was empty --> return error page
 		if (zeroCount == order.getOrderQuant().length) {
 
+			return "emptyOrder";
+		}
+		
+		//order had negative number, display error page
+		if(negativeNum) {
 			return "emptyOrder";
 		}
 
