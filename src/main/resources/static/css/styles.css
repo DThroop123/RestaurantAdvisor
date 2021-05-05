@@ -21,22 +21,6 @@
 	display: table;
 }
 
-.custom-table {
-	text-align: center;
-}
-
-.custom-table_th {
-	border: solid;
-	border-width: 2px !important;
-	border-color: grey !important;
-	width: 120px;
-	background-color: white !important;
-}
-
-.custom-table_td {
-	background-color: white !important;
-}
-
 .custom-table_btn {
 	color: white;
 	background-color: #1A5972;
@@ -82,7 +66,11 @@ a:hover {
 	opacity: 0.7 !important;
 }
 
-/* RestaurantLogin styles */
+.d-flex {
+	width: 30% !important;
+}
+
+/* userLogin styles */
 .login-header-div {
 	width: fit-content;
 	text-align: center;
@@ -98,7 +86,7 @@ a:hover {
 
 .login-div {
 	text-align: center;
-	width: 30%;
+	width: 650px;
 	margin: 100px auto 0px;
 }
 
@@ -112,20 +100,18 @@ a:hover {
 
 .login-img {
 	float: left;
-	max-height: 100%;
-	padding: 12px 10px;
-	margin-right: 2%;
+	padding: 14px;
+	width: 55px;
 }
 
 .login-input {
 	float: left;
-	max-width: 100%;
-	min-width: 75%;
+	width: 595px;
 	outline: none;
 	border: none;
-	padding: 0px;
+	padding: 0px 0px 0px 15px;
 	height: 100%;
-	border-radius: 0px 40px 40px 0px;
+	border-radius: 0px 14px 15px 0px;
 	font-size: 16px;
 }
 
@@ -183,6 +169,7 @@ a:hover {
 	width: 15%;
 	margin-left: 60px;
 }
+
 
 /* Register Styles */
 .register-header-div {

@@ -11,35 +11,45 @@
 		<img class="login-logo" src="/media/LoginLogo.png" />
 	</div>
 
-	<form class="register-form" action="#" th:action="@{/register}" th:object="${user}" method="post">
-	<span class="error-message" th:text="${errorMsg}"></span>
-	<span class="register-message" th:text="${message}"></span>
+	<form class="register-form" action="#" th:action="@{/register}"
+		th:object="${user}" method="post">
+		<span class="error-message" th:text="${errorMsg}"></span> <span
+			class="register-message" th:text="${message}"></span>
 		<table class="register-table">
 			<tr>
 				<td><input placeholder="Email" type="text" th:field="*{email}" /></td>
-				<td><input placeholder="Street Number" type="text" th:field="*{stno}" /></td>
-			</tr>
-			<tr>
-				<td><input placeholder="Password" type="text" th:field="*{password}" /></td>
-				<td><input placeholder="Street Name" type="text" th:field="*{stname}" /></td>
-			</tr>
-			<tr>
-				<td><input placeholder="First Name" type="text" th:field="*{fname}" /></td>
-				<td><input placeholder="City" type="text" th:field="*{city}" /></td>
-			</tr>
-			<tr>
-				<td><input placeholder="Middle Initial" type="text" th:field="*{minit}" /></td>
-				<td><input placeholder="State" type="text" th:field="*{state}" /></td>
-			</tr>
-			<tr>
-				<td><input placeholder="Last Name" type="text" th:field="*{lname}" /></td>
-				<td><input placeholder="Zipcode" type="text" th:field="*{zip}" /></td>
+				<td><input placeholder="Street Number" type="text"
+					th:field="*{stno}" /></td>
 			</tr>
 			<tr>
 				<td><input placeholder="Phone" type="text" th:field="*{phone}" /></td>
+				<td><input placeholder="Street Name" type="text"
+					th:field="*{stname}" /></td>
+			</tr>
+			<tr>
+				<td><input placeholder="First Name" type="text"
+					th:field="*{fname}" /></td>
+				<td><input placeholder="City" type="text" th:field="*{city}" /></td>
+			</tr>
+			<tr>
+				<td><input placeholder="Middle Initial" type="text"
+					th:field="*{minit}" /></td>
+				<td><input placeholder="State" type="text" th:field="*{state}" /></td>
+			</tr>
+			<tr>
+				<td><input placeholder="Last Name" type="text"
+					th:field="*{lname}" /></td>
+				<td><input placeholder="Zipcode" type="text" th:field="*{zip}" /></td>
+			</tr>
+			<tr>
+				<td><input placeholder="Password" type="text"
+					th:field="*{password}" /></td>
 			</tr>
 		</table>
 		<input class="register-btn" type="submit" value="Register" />
+		<div class="login-button-div" style="margin-top: 20px">
+			<a class="login-forgot-password" href="userLogin">Return to Login</a>
+		</div>
 	</form>
 </body>
 </html>

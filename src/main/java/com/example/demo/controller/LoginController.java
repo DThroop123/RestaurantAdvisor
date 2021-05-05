@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +26,6 @@ public class LoginController {
 	public String userLogin(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
 		String viewPage = "userLogin", message = "";
-//		HttpSession session = request.getSession(true);
-//		session.invalidate();
 
 		model.addAttribute("user", user);
 		model.addAttribute("message", message);
@@ -116,25 +113,46 @@ public class LoginController {
 
 		try {
 			Integer.parseInt(user.getStno());
-			System.out.println("stNo is an int");
-			// stNo is an int
-			userService.registerUser(user);
 
-			HttpSession session = request.getSession(true);
-			session.setAttribute("email", user.getEmail());
+			// check if user already exists
+			List<User> userList = new ArrayList<User>();
+			userList = userService.getUserList();
+			Boolean found = false;
+			if (user.getEmail() != "") {
+				for (int i = 0; i < userList.size(); i++) {
+					if (userList.get(i).getEmail().equals(user.getEmail())) {
+						found = true;
+					}
+				}
 
-			viewPage = "home";
-			String registrationMessage = "Registration Successful!";
+				if (!found) {
+					// register user
+					userService.registerUser(user);
 
-			model.addAttribute("user", user);
-			model.addAttribute("registrationMessage", registrationMessage);
+					HttpSession session = request.getSession(true);
+					session.setAttribute("email", user.getEmail());
 
+					viewPage = "home";
+					String registrationMessage = "Registration Successful!";
+
+					model.addAttribute("user", user);
+					model.addAttribute("registrationMessage", registrationMessage);
+				} else {
+					viewPage = "register";
+					String errorMsg = "Email is already associated with an account";
+					model.addAttribute("errorMsg", errorMsg);
+				}
+			} else {
+				viewPage = "register";
+				String errorMsg = "Email field is required";
+				model.addAttribute("errorMsg", errorMsg);
+			}
 		} catch (NumberFormatException e) {
 			viewPage = "register";
 			String errorMsg = "Street Number field must be a number";
 			model.addAttribute("errorMsg", errorMsg);
 		}
-
+		viewPage = "register";
 		return viewPage;
 	}
 
