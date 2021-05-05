@@ -42,7 +42,7 @@
 	
 	<form action="" th:action="@{/submitReview}" th:object="${review}" method="post">
 		<label for="reviewTitle">Title:</label><br>
-	  	<input type="text"  th:field="*{reviewTitle}" ><br><br>
+	  	<input type="text"  th:field="*{reviewTitle}" size=40><br><br>
 	  	<label for="reviewDescr">Description:</label><br>
 	  	<input type="text" id="reviewDescr" th:field="*{reviewDescr}" name="reviewDescr" size=100><br><br>
 	  	<label for="rating">Rating (between 1 and 5):</label>

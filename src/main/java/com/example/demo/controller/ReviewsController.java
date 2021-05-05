@@ -66,7 +66,6 @@ public class ReviewsController {
 //		insert review
 		@RequestMapping(value = "/submitReview", method = RequestMethod.POST)
 		public String orderSubmissionDisplay(@ModelAttribute("review") Review review, Model model, SessionStatus status, HttpServletRequest request) {
-			System.out.println("I am in the submitReview controller");
 
 			HttpSession session = request.getSession(true);
 			review.setCustEmail(session.getAttribute("email").toString());
