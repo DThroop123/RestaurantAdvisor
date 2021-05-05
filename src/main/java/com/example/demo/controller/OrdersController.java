@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.awt.Menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.example.demo.domain.MenuItems;
 import com.example.demo.domain.Order;
 import com.example.demo.domain.SumRestaurant;
-import com.example.demo.domain.User;
 import com.example.demo.service.MenuItemsService;
 import com.example.demo.service.OrderService;
 import com.example.demo.service.SumRestaurantService;
