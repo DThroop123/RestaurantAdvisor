@@ -60,8 +60,7 @@
 							<tr th:each="menu, stat : ${menuItems}">
 								<td th:text="${menu.foodName}"></td>
 								<td th:text="${menu.price}"></td>
-								<td><input type="text"
-									th:field="*{orderQuant[__${stat.index}__]}" /></td>
+								<td><input type="number" th:field="*{orderQuant[__${stat.index}__]}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" /></td>
 							</tr>
 						</tbody>
 					</table>

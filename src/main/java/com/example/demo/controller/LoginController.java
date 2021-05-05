@@ -22,10 +22,10 @@ public class LoginController {
 	@Autowired
 	UserService userService;
 
-	@RequestMapping(value = "/userLogin", method = RequestMethod.GET)
+	@RequestMapping(value = "/RestaurantLogin", method = RequestMethod.GET)
 	public String userLogin(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
-		String viewPage = "userLogin", message = "";
+		String viewPage = "RestaurantLogin", message = "";
 
 		model.addAttribute("user", user);
 		model.addAttribute("message", message);
@@ -48,7 +48,7 @@ public class LoginController {
 	}
 
 	// login user
-	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+	@RequestMapping(value = "/RestaurantLogin", method = RequestMethod.POST)
 	public String loginUser(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
 		String viewPage = "", message = "";
@@ -72,13 +72,13 @@ public class LoginController {
 					viewPage = "home";
 				} else {
 					message = "Incorrect password";
-					viewPage = "userLogin";
+					viewPage = "RestaurantLogin";
 					user = new User();
 				}
 			}
 		}
 		if (!found) {
-			viewPage = "userLogin";
+			viewPage = "RestaurantLogin";
 			message = "User not found";
 			user = new User();
 		}
@@ -97,7 +97,7 @@ public class LoginController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String userLogout(HttpServletRequest request, @ModelAttribute User user, Model model) {
 
-		String viewPage = "userLogin", message = "";
+		String viewPage = "RestaurantLogin", message = "";
 		HttpSession session = request.getSession(true);
 		session.invalidate();
 
