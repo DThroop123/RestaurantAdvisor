@@ -32,20 +32,20 @@ public class LoginController {
 
 		return viewPage;
 	}
-	
-//	@RequestMapping(value = "/home", method = RequestMethod.GET)
-//	public String goHome(HttpServletRequest request, Model model) {
-//
-//		String viewPage = "Home", message = "";
-//
-//		HttpSession session = request.getSession();
-//		String name = session.getAttribute("fname").toString();
-//
-//		model.addAttribute("name", name);
-//		model.addAttribute("message", message);
-//
-//		return viewPage;
-//	}
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String goHome(HttpServletRequest request, Model model) {
+
+		String viewPage = "Home", message = "";
+
+		HttpSession session = request.getSession();
+		var user = session.getAttribute("user");
+
+		model.addAttribute("user", user);
+		model.addAttribute("message", message);
+
+		return viewPage;
+	}
 
 	// login user
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
@@ -68,7 +68,6 @@ public class LoginController {
 				found = true;
 				if (userList.get(i).getPassword().equals(password)) {
 					session.setAttribute("email", email);
-					session.setAttribute("fname", userList.get(i).getFname());
 					userIndex = i;
 					viewPage = "home";
 				} else {
@@ -86,6 +85,7 @@ public class LoginController {
 
 		if (userIndex > -1) {
 			model.addAttribute("user", userList.get(userIndex));
+			session.setAttribute("user", userList.get(userIndex));
 		} else {
 			model.addAttribute("user", user);
 		}
@@ -126,48 +126,65 @@ public class LoginController {
 		System.out.println("I am in register inside login controller");
 		String viewPage;
 
-		try {
-			Integer.parseInt(user.getStno());
-
-			// check if user already exists
-			List<User> userList = new ArrayList<User>();
-			userList = userService.getUserList();
-			Boolean found = false;
-			if (user.getEmail() != "") {
-				for (int i = 0; i < userList.size(); i++) {
-					if (userList.get(i).getEmail().equals(user.getEmail())) {
-						found = true;
-					}
-				}
-
-				if (!found) {
-					// register user
-					userService.registerUser(user);
-
-					HttpSession session = request.getSession(true);
-					session.setAttribute("email", user.getEmail());
-
-					viewPage = "home";
-					String registrationMessage = "Registration Successful!";
-
-					model.addAttribute("user", user);
-					model.addAttribute("registrationMessage", registrationMessage);
-				} else {
-					viewPage = "register";
-					String errorMsg = "Email is already associated with an account";
-					model.addAttribute("errorMsg", errorMsg);
-				}
-			} else {
-				viewPage = "register";
-				String errorMsg = "Email field is required";
-				model.addAttribute("errorMsg", errorMsg);
-			}
-		} catch (NumberFormatException e) {
+		// check if user already exists
+		List<User> userList = new ArrayList<User>();
+		userList = userService.getUserList();
+		Boolean found = false;
+		// check for email field filled in
+		if (user.getEmail() == "") {
+			// email field is required
 			viewPage = "register";
-			String errorMsg = "Street Number field must be a number";
+			String errorMsg = "Email field is required";
 			model.addAttribute("errorMsg", errorMsg);
+			return viewPage;
 		}
-		viewPage = "register";
+
+		for (int i = 0; i < userList.size(); i++) {
+			if (userList.get(i).getEmail().equals(user.getEmail())) {
+				found = true;
+			}
+		}
+		if (found) {
+			// email is already in database
+			viewPage = "register";
+			String errorMsg = "Email is already associated with an account";
+			model.addAttribute("errorMsg", errorMsg);
+			return viewPage;
+		}
+
+		if (user.getFname() == "") {
+			viewPage = "register";
+			String errorMsg = "First name field cannot be empty";
+			model.addAttribute("errorMsg", errorMsg);
+			return viewPage;
+		}
+		
+		if (user.getLname() == "") {
+			viewPage = "register";
+			String errorMsg = "Last name field cannot be empty";
+			model.addAttribute("errorMsg", errorMsg);
+			return viewPage;
+		}
+		
+		if (user.getPassword() == "") {
+			viewPage = "register";
+			String errorMsg = "Password cannot be empty";
+			model.addAttribute("errorMsg", errorMsg);
+			return viewPage;
+		}
+
+		// register user
+		userService.registerUser(user);
+
+		HttpSession session = request.getSession(true);
+		session.setAttribute("email", user.getEmail());
+
+		viewPage = "home";
+		String registrationMessage = "Registration Successful!";
+
+		model.addAttribute("user", user);
+		model.addAttribute("registrationMessage", registrationMessage);
+
 		return viewPage;
 	}
 

@@ -5,6 +5,17 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
+<style>
+/* number input arrow override */
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type=number] {
+	-moz-appearance: textfielod;
+}
+</style>
 <body>
 	<div class="register-header-div clearfix">
 		<h1 class="login-header">Restaurant Advisor</h1>
@@ -13,37 +24,30 @@
 
 	<form class="register-form" action="#" th:action="@{/register}"
 		th:object="${user}" method="post">
-		<span class="error-message" th:text="${errorMsg}"></span> <span
-			class="register-message" th:text="${message}"></span>
+		<span class="error-message" th:text="${errorMsg}"></span> <span class="register-message" th:text="${message}"></span>
 		<table class="register-table">
 			<tr>
-				<td><input placeholder="Email" type="text" th:field="*{email}" /></td>
-				<td><input placeholder="Street Number" type="text"
-					th:field="*{stno}" /></td>
+				<td><input placeholder="Email*" type="email" th:field="*{email}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="40" /></td>
+				<td><input placeholder="Street Number" type="number" th:field="*{stno}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="10" /></td>
 			</tr>
 			<tr>
-				<td><input placeholder="Phone" type="text" th:field="*{phone}" /></td>
-				<td><input placeholder="Street Name" type="text"
-					th:field="*{stname}" /></td>
+				<td><input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="20" placeholder="Phone" type="tel" th:field="*{phone}" /></td>
+				<td><input placeholder="Street Name" type="text" th:field="*{stname}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="30"/></td>
 			</tr>
 			<tr>
-				<td><input placeholder="First Name" type="text"
-					th:field="*{fname}" /></td>
-				<td><input placeholder="City" type="text" th:field="*{city}" /></td>
+				<td><input placeholder="First Name" type="text" th:field="*{fname}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="30"/></td>
+				<td><input placeholder="City" type="text" th:field="*{city}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="15"/></td>
 			</tr>
 			<tr>
-				<td><input placeholder="Middle Initial" type="text"
-					th:field="*{minit}" /></td>
-				<td><input placeholder="State" type="text" th:field="*{state}" /></td>
+				<td><input placeholder="Middle Initial" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="1" type="text" th:field="*{minit}" /></td>
+				<td><input placeholder="State" type="text" th:field="*{state}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="30" /></td>
 			</tr>
 			<tr>
-				<td><input placeholder="Last Name" type="text"
-					th:field="*{lname}" /></td>
-				<td><input placeholder="Zipcode" type="text" th:field="*{zip}" /></td>
+				<td><input placeholder="Last Name" type="text" th:field="*{lname}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="30"/></td>
+				<td><input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" placeholder="Zipcode" type="number" maxlength="5" th:field="*{zip}" /></td>
 			</tr>
 			<tr>
-				<td><input placeholder="Password" type="text"
-					th:field="*{password}" /></td>
+				<td><input placeholder="Password*" type="password" th:field="*{password}" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="30"/></td>
 			</tr>
 		</table>
 		<input class="register-btn" type="submit" value="Register" />
